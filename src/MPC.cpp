@@ -6,8 +6,8 @@
 using CppAD::AD;
 
 // TODO: Set the timestep length and duration
-size_t N = 0;
-double dt = 0;
+size_t N = 20;
+double dt = 0.1;
 
 // This value assumes the model presented in the classroom is used.
 //
@@ -33,6 +33,23 @@ class FG_eval {
     // `fg` a vector of the cost constraints, `vars` is a vector of variable values (state & actuators)
     // NOTE: You'll probably go back and forth between this function and
     // the Solver function below.
+    fg[0] = 0;
+
+    for (int i = 0; i < N; i++) {
+      fg[0] += CppAD::pow(vars[cte_start + i] - ref_cte, 2);
+      fg[0] += CppAD::pow(vars[epsi_start + i] - ref_epsi, 2);
+      fg[0] += CppAD::pow(vars[v_start + i] - ref_v, 2);
+    }
+
+    for (int i = 0; i < N - 1; i++) {
+      fg[0] += CppAD::pow(vars[delta_start + i], 2);
+      fg[0] += CppAD::pow(vars[a_start + i], 2);
+    }
+
+    for (int i = 0; i < N - 2; i++) {
+      fg[0] += 500*CppAD::pow(vars[delta_start + i + 1] - vars[delta_start + i], 2);
+      fg[0] += CppAD::pow(vars[a_start + i + 1] - vars[a_start + i], 2);
+    }
   }
 };
 
