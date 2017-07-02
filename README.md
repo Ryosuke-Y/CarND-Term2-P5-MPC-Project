@@ -19,14 +19,14 @@ The actuation attributes are following:
 - Acceleration denoted: "a"  
 
 Update Equations are following:  
-
-$x_{t+1} = x_t + v_t * cos(\psi) * dt$  
-$y_{t+1} = y_t + v_t * sin(\psi) * dt$  
-$\psi_{t+1} = \psi_t + \frac{v_t}{L_f} * \delta_t *dt$  
-$v_{t+1} = v_t + a_t * dt$  
-$cte_{t+1} = f(x_t) - y_t + (v_t* sin(\psi) * dt)$  
-$e\psi_{t+1} = \psi_t - \psi des_t + (\frac{v_t}{L_f} * \delta_t *dt)$   
-
+```math  
+x_{t+1} = x_t + v_t * cos(\psi) * dt  
+y_{t+1} = y_t + v_t * sin(\psi) * dt  
+\psi_{t+1} = \psi_t + \frac{v_t}{L_f} * \delta_t *dt  
+v_{t+1} = v_t + a_t * dt  
+cte_{t+1} = f(x_t) - y_t + (v_t* sin(\psi) * dt)  
+e\psi_{t+1} = \psi_t - \psi des_t + (\frac{v_t}{L_f} * \delta_t *dt)   
+```  
 
 ## Dependencies
 
