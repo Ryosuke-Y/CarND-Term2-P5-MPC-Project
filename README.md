@@ -3,6 +3,31 @@ Self-Driving Car Engineer Nanodegree Program
 
 ---
 
+## Model  
+The Model used in the project is a simple Kinematic Model consisting of Vehicle states and Actuators. Vehicle State can be represented as a vector [$x$,$y$,$psi$,$v$,$cte$,$epsi$]$. Actuators are set of controls used to navigate and accelerate/deccelerate the vehicle.  
+
+The state is calculated using the following attributes:  
+- Vehicle position denoted: x and y  
+- Vehicle orientation denoted: psi  
+- Vehicle velocity: v  
+- Vehicle Cross Track Error: cte  
+- Vehicle Orientation Error: epsi  
+
+The actuation attributes are following:  
+
+- Steering angle denoted: delta  
+- Acceleration denoted: "a"  
+
+Update Equations are following:  
+
+$x_{t+1} = x_t + v_t * cos(\psi) * dt$  
+$y_{t+1} = y_t + v_t * sin(\psi) * dt$  
+$\psi_{t+1} = \psi_t + \frac{v_t}{L_f} * \delta_t *dt$  
+$v_{t+1} = v_t + a_t * dt$  
+$cte_{t+1} = f(x_t) - y_t + (v_t* sin(\psi) * dt)$  
+$e\psi_{t+1} = \psi_t - \psi des_t + (\frac{v_t}{L_f} * \delta_t *dt)$   
+
+
 ## Dependencies
 
 * cmake >= 3.5
@@ -19,7 +44,7 @@ Self-Driving Car Engineer Nanodegree Program
   * Run either `install-mac.sh` or `install-ubuntu.sh`.
   * If you install from source, checkout to commit `e94b6e1`, i.e.
     ```
-    git clone https://github.com/uWebSockets/uWebSockets 
+    git clone https://github.com/uWebSockets/uWebSockets
     cd uWebSockets
     git checkout e94b6e1
     ```
@@ -31,7 +56,7 @@ Self-Driving Car Engineer Nanodegree Program
   * Mac: `brew install ipopt`
   * Linux
     * You will need a version of Ipopt 3.12.1 or higher. The version available through `apt-get` is 3.11.x. If you can get that version to work great but if not there's a script `install_ipopt.sh` that will install Ipopt. You just need to download the source from the Ipopt [releases page](https://www.coin-or.org/download/source/Ipopt/) or the [Github releases](https://github.com/coin-or/Ipopt/releases) page.
-    * Then call `install_ipopt.sh` with the source directory as the first argument, ex: `bash install_ipopt.sh Ipopt-3.12.1`. 
+    * Then call `install_ipopt.sh` with the source directory as the first argument, ex: `bash install_ipopt.sh Ipopt-3.12.1`.
   * Windows: TODO. If you can use the Linux subsystem and follow the Linux instructions.
 * [CppAD](https://www.coin-or.org/CppAD/)
   * Mac: `brew install cppad`
