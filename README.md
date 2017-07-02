@@ -4,7 +4,7 @@ Self-Driving Car Engineer Nanodegree Program
 ---
 
 ## Model  
-The Model used in the project is a simple Kinematic Model consisting of Vehicle states and Actuators. Vehicle State can be represented as a vector [$x$,$y$,$psi$,$v$,$cte$,$epsi$]$. Actuators are set of controls used to navigate and accelerate/deccelerate the vehicle.  
+The Model used in the project is a simple Kinematic Model consisting of Vehicle states and Actuators. Vehicle State can be represented as a vector [x,y,psi,v,cte,epsi]. Actuators are set of controls used to navigate and accelerate/deccelerate the vehicle.  
 
 The state is calculated using the following attributes:  
 - Vehicle position denoted: x and y  
