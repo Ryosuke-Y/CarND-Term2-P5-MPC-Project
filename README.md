@@ -19,14 +19,35 @@ The actuation attributes are following:
 - Acceleration denoted: "a"  
 
 Update Equations are following:  
-```math  
-x_{t+1} = x_t + v_t * cos(\psi) * dt  
-y_{t+1} = y_t + v_t * sin(\psi) * dt  
-\psi_{t+1} = \psi_t + \frac{v_t}{L_f} * \delta_t *dt  
-v_{t+1} = v_t + a_t * dt  
-cte_{t+1} = f(x_t) - y_t + (v_t* sin(\psi) * dt)  
-e\psi_{t+1} = \psi_t - \psi des_t + (\frac{v_t}{L_f} * \delta_t *dt)   
 ```  
+x_{t+1} = x_t + v_t * cos(psi) * dt  
+y_{t+1} = y_t + v_t * sin(psi) * dt  
+psi_{t+1} = psi_t + v_t/Lf * delta_t *dt  
+v_{t+1} = v_t + a_t * dt  
+cte_{t+1} = f(x_t) - y_t + (v_t* sin(epsi_t) * dt)  
+epsi_{t+1} = psi_t - psi * des_t + (v_t/Lf * delta_t *dt)   
+```  
+
+## Tuning N and dt values  
+
+The final values chosen for time-step length N and duration dt are 20 and 0.1. Choosing a high value of the number of time steps in the future can lead to more computation as well as unstable driving. I have tested values between 10 and 30 and I found that N=20 was a little bit stable. Also, I have considered values from 0 to 0.4 for dt which describes how much time lapse between actuations and found than a value of 0.1 was the best for making the can as stable as possible.  
+
+# Handling Latency  
+
+In order to handle a 100 millisecond latency, I predicted the states (x,y,v,phi) 100ms into the future as follows:
+
+```
+double dt = 0.1;
+const double Lf = 2.67;
+double dt = 0.1;
+const double Lf = 2.67;
+state[0] = v*cos(0)*dt;
+state[1] = v*sin(0)*dt;
+state[2] = (-v/Lf)*steer_value*dt;
+state[3] = v + throttle_value*dt;
+state[4] = cte + v*sin(epsi)*dt;
+state[5] = epsi - (v/Lf)*steer_value*dt;
+```
 
 ## Dependencies
 
